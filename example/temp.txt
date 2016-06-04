@@ -1,0 +1,89 @@
+a1=30.0
+a2=50.0
+a3=100.0
+b1=5.0
+b3=log(2)/8.0
+b11= 0.5
+b22 =0.5
+b33= 0.5
+g1= 0.4
+g2= 0.4
+g3= 0.3
+d1= 0.25
+d2= 0.3
+d3= 0.3
+h= 0.5
+cd= 5.0
+t1= 4.0
+t2= 8.0
+G0= 50.0
+Alpha1=1.0
+Alpha2=1.0
+ Alpha3=1.0
+cb=20.0
+th0=.2
+th1=0.4
+th=th0+(th1-th0)*exp(-Coo.u*0.05)
+R1=g3*(Coo.p3+((h+th*cd)/th))*((1-exp(-d3*(Coo.t3-t2)))/d3)+(g3*(h+th*cd)/(th*(th-d3)))*(exp(th*t2)-exp((th-d3)*Coo.t3)*exp(d3*t2))
+	
+	R2=(g2*(Coo.p2+((h+th*cd)/th))*((1-exp(-d2*(t2-t1)))/d2)+(g2*(h+th*cd)/(th*(th-d2)))*(exp(th*t1)-exp((th-d2)*t2)*exp(d2*t1)))+R1*exp(-d2*t2)*exp(d2*t1)
+
+	GT1=(1/(2*Alpha1))*(g1/d1*(Coo.p1+((h+th*cd)/th))*((1-exp(-d1*t1))/d1-(exp(-d1*t1)*(exp(d1*t1)-exp(-d1*t1)))/(2*d1))+(g1*(h+th*cd)/(th*(th-d1)))*((exp(th*t1)-exp(-d1*t1))/(th+d1)-(exp((th-d1)*t1)*(exp(d1*t1)-exp(-d1*t1)))/(2*d1))+R2*exp(-d1*t1)*((exp(d1*t1)-exp(-d1*t1))/(2*d1)))+G0*exp(-d1*t1)
+
+
+	GT2=(1/(2*Alpha2))*(g2/d2*(Coo.p2+((h+th*cd)/th))*((1-exp(d2*t1)*exp(-d2*t2))/d2-(exp(-d2*t2)*(exp(d2*t2)-exp(2*d2*t1)*exp(-d2*t2)))/(2*d2))+(g2*(h+th*cd)/(th*(th-d2)))*((exp(th*t2)-exp((th+d2)*t1)*exp(-d2*t2))/(th+d2)-(exp((th-d2)*t2)*(exp(d2*t2)-exp(2*d2*t1)*exp(-d2*t2)))/(2*d2))+R1*exp(-d2*t2)*((exp(d2*t2)-exp(2*d2*t1)*exp(-d2*t2))/(2*d2)))+GT1*exp(d2*t1)*exp(-d2*t2)
+
+
+
+	IT33=exp(th*(Coo.t3-t2))*(-b33*Coo.p3*(1-exp(th*(t2-Coo.t3)))/th+a3*(exp(-b3*Coo.t3)-exp((th-b3)*t2)*exp(-th*Coo.t3))/(th-b3)+1/(th-d3)*g3*GT2*exp(d3*t2)*(exp(-d3*Coo.t3)-exp((th-d3)*t2)*exp(-th*Coo.t3))+(g3/(2*Alpha3))*(g3/d3*(Coo.p3+((h+th*cd)/th))*(1/d3*((1-exp(th*(t2-Coo.t3)))/th-1/(th-d3)*exp(d3*t2)*(exp(-d3*Coo.t3)-exp((th-d3)*t2)*exp(-th*Coo.t3)))-(exp(-d3*Coo.t3)/(2*d3))*((exp(d3*Coo.t3)-exp((th+d3)*t2)*exp(-th*Coo.t3))/(th+d3)-1/(th-d3)*exp(2*d3*t2)*(exp(-d3*Coo.t3)-exp((th-d3)*t2)*exp(-th*Coo.t3))))+(g3*(h+th*cd)/(th*(th-d3)))*(1/(th+d3)*((exp(th*Coo.t3)-exp(2*th*t2)*exp(-th*Coo.t3))/(2*th)-1/(th-d3)*exp((th+d3)*t2)*(exp(-d3*Coo.t3)-exp((th-d3)*t2)*exp(-th*Coo.t3)))-exp((th-d3)*Coo.t3)/(2*d3)*((exp(d3*Coo.t3)-exp((th+d3)*t2)*exp(-th*Coo.t3))/(th+d3)-1/(th-d3)*exp(2*d3*t2)*(exp(-d3*Coo.t3)-exp((th-d3)*t2)*exp(-th*Coo.t3))))))
+
+
+	IT222=IT33+(a2-b22*Coo.p2)*(1-exp(th*(t1-t2)))/th+(g2*GT1*exp(d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2)))/(th-d2)+(g2/(2*Alpha2))*(g2/d2*(Coo.p2+((h+th*cd)/th))*(1/d2*((1-exp(th*(t1-t2)))/th-(exp(d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2)))/(th-d2))-(exp(-d2*t2)/(2*d2))*((exp(d2*t2)-exp((th+d2)*t1)*exp(-th*t2))/(th+d2)-1/(th-d2)*exp(2*d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2))))+(g2*(h+th*cd)/(th*(th-d2)))*(1/(th+d2)*((exp(th*t2)-exp(2*th*t1)*exp(-th*t2))/(2*th)-1/(th-d2)*exp((th+d2)*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2)))-exp((th-d2)*t2)/(2*d2)*((exp(d2*t2)-exp((th+d2)*t1)*exp(-th*t2))/(th+d2)-1/(th-d2)*exp(2*d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2))))+(R1*exp(-d2*t2))/(2*d2)*((exp(d2*t2)-exp((th+d2)*t1)*exp(-th*t2))/(th+d2)-(exp(2*d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2)))/(th-d2)))*exp(th*(t2-t1))
+
+
+
+	I0000=IT222+(a1/th*(1-exp(-th*t1))+b1*(t1/th-(1-exp(-th*t1))/(th*th))-b11*Coo.p1*(1-exp(-th*t1))/th+(g1*G0*(exp(-d1*t1)-exp(-th*t1)))/(th-d1))+(g1/(2*Alpha1))*(g1/d1*(Coo.p1+((h+th*cd)/th))*(1/d1*((1-exp(-th*t1))/th-(exp(-d1*t1)-exp(-th*t1))/(th-d1))-(exp(-d1*t1)/(2*d1))*((exp(d1*t1)-exp(-th*t1))/(th+d1)-(exp(-d1*t1)-exp(-th*t1))/(th-d1)))+(g1*(h+th*cd)/(th*(th-d1)))*(1/(th+d1)*((exp(th*t1)-exp(-th*t1))/(2*th)-(exp(-d1*t1)-exp(-th*t1))/(th-d1))-exp((th-d1)*t1)/(2*d1)*((exp(d1*t1)-exp(-th*t1))/(th+d1)-(exp(-d1*t1)-exp(-th*t1))/(th-d1)))+(R2*exp(-d1*t1))/(2*d1)*((exp(d1*t1)-exp(-th*t1))/(th+d1)-(exp(-d1*t1)-exp(-th*t1))/(th-d1)))*exp(th*t1)
+
+
+
+
+	IT2=I0000*exp(-th*t1)-(a1/th*(1-exp(-th*t1))+b1*(t1/th-(1-exp(-th*t1))/(th*th))-b11*Coo.p1*(1-exp(-th*t1))/th+(g1*G0*(exp(-d1*t1)-exp(-th*t1)))/(th-d1))-(g1/(2*Alpha1))*(g1/d1*(Coo.p1+((h+th*cd)/th))*(1/d1*((1-exp(-th*t1))/th-(exp(-d1*t1)-exp(-th*t1))/(th-d1))-(exp(-d1*t1)/(2*d1))*((exp(d1*t1)-exp(-th*t1))/(th+d1)-(exp(-d1*t1)-exp(-th*t1))/(th-d1)))+(g1*(h+th*cd)/(th*(th-d1)))*(1/(th+d1)*((exp(th*t1)-exp(-th*t1))/(2*th)-(exp(-d1*t1)-exp(-th*t1))/(th-d1))-exp((th-d1)*t1)/(2*d1)*((exp(d1*t1)-exp(-th*t1))/(th+d1)-(exp(-d1*t1)-exp(-th*t1))/(th-d1)))+(R2*exp(-d1*t1))/(2*d1)*((exp(d1*t1)-exp(-th*t1))/(th+d1)-(exp(-d1*t1)-exp(-th*t1))/(th-d1)))
+
+
+
+	IT3=IT2*exp(th*(t1-t2))-(a2-b22*Coo.p2)*(1-exp(th*(t1-t2)))/th-(g2*GT1*exp(d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2)))/(th-d2)-(g2/(2*Alpha2))*(g2/d2*(Coo.p2+((h+th*cd)/th))*(1/d2*((1-exp(th*(t1-t2)))/th-(exp(d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2)))/(th-d2))-(exp(-d2*t2)/(2*d2))*((exp(d2*t2)-exp((th+d2)*t1)*exp(-th*t2))/(th+d2)-1/(th-d2)*exp(2*d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2))))+(g2*(h+th*cd)/(th*(th-d2)))*(1/(th+d2)*((exp(th*t2)-exp(2*th*t1)*exp(-th*t2))/(2*th)-1/(th-d2)*exp((th+d2)*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2)))-exp((th-d2)*t2)/(2*d2)*((exp(d2*t2)-exp((th+d2)*t1)*exp(-th*t2))/(th+d2)-1/(th-d2)*exp(2*d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2))))+(R1*exp(-d2*t2))/(2*d2)*((exp(d2*t2)-exp((th+d2)*t1)*exp(-th*t2))/(th+d2)-(exp(2*d2*t1)*(exp(-d2*t2)-exp((th-d2)*t1)*exp(-th*t2)))/(th-d2)))
+
+
+	GT0T1=2
+
+
+	GTT1T2=(1/(2*Alpha2))*(g2/d2*(Coo.p2+((h+th*cd)/th))*((1/d2)*((t2-t1)-exp(d2*t1)/d2*(exp(-d2*t1)-exp(-d2*t2)))-exp(-d2*t2)/(2*d2)*((exp(d2*t2)-exp(d2*t1))/d2-(exp(2*d2*t1)*(exp(-d2*t1)-exp(-d2*t2)))/d2))+(g2*(h+th*cd)/(th*(th-d2)))*(1/(th+d2)*((exp(th*t2)-exp(th*t1))/th-(exp((th+d2)*t1)*(exp(-d2*t1)-exp(-d2*t2)))/d2)-exp((th-d2)*t2)/(2*d2)*((exp(d2*t2)-exp(d2*t1))/d2-(exp(2*d2*t1)*(exp(-d2*t1)-exp(-d2*t2)))/d2))+R1*exp(-d2*t2)*(1/(2*d2))*((exp(d2*t2)-exp(d2*t1))/d2-(exp(2*d2*t1)*(exp(-d2*t1)-exp(-d2*t2)))/d2))+GT1*exp(d2*t1)*((exp(-d2*t1)-exp(-d2*t2))/d2)
+
+
+	GTT2T3=(1/(2*Alpha3))*(g3/d3*(Coo.p3+((h+th*cd)/th))*((1/d3)*((Coo.t3-t2)-exp(d3*t2)/d3*(exp(-d3*t2)-exp(-d3*Coo.t3)))-exp(-d3*Coo.t3)/(2*d3)*((exp(d3*Coo.t3)-exp(d3*t2))/d3-(exp(2*d3*t2)*(exp(-d3*t2)-exp(-d3*Coo.t3)))/d3))+(g3*(h+th*cd)/(th*(th-d3)))*(1/(th+d3)*((exp(th*Coo.t3)-exp(th*t2))/th-(exp((th+d3)*t2)*(exp(-d3*t2)-exp(-d3*Coo.t3)))/d3)-exp((th-d3)*Coo.t3)/(2*d3)*((exp(d3*Coo.t3)-exp(d3*t2))/d3-(exp(2*d3*t2)*(exp(-d3*t2)-exp(-d3*Coo.t3)))/d3)))+GT2*exp(d3*t2)*((exp(-d3*t2)-exp(-d3*Coo.t3))/d3)
+
+
+	gt20t1=(1/(4*Alpha1))*(((g1*g1)/(d1*d1))*(Coo.p1+((h+th*cd)/th))*(Coo.p1+((h+th*cd)/th))*((t1-0)-(2*exp(-d1*t1)*(exp(d1*t1)-1))/d1+(exp(-2*d1*t1)*(exp(2*d1*t1)-1))/(2*d1))+((g1*g1*(h+th*cd)*(h+th*cd))/(th*th*(th-d1)*(th-d1)))*((exp(2*th*t1)-1)/(2*th)+(exp(2*(th-d1)*t1)*(exp(2*d1*t1)-1))/(2*d1)-(2*exp((th-d1)*t1)*(exp((th+d1)*t1)-1))/(th+d1))+((2*g1*g1*(h+th*cd))/(th*(th-d1)*d1))*(Coo.p1+((h+th*cd)/th))*((exp(th*t1)-1)/th-(exp((th-d1)*t1)*(exp(d1*t1)-1))/d1-(exp(-d1*t1)*(exp((th+d1)*t1)-1))/(th+d1)+(exp((th-d1)*t1)*exp(-d1*t1)*(exp(2*d1*t1)-1))/(2*d1))+R2*R2*((exp(-2*d1*t1)*(exp(2*d1*t1)-1))/(2*d1))+((2*R2*g1)/d1)*(Coo.p1+((h+th*cd)/th))*exp(-d1*t1)*((exp(d1*t1)-1)/d1-(exp(-d1*t1)*(exp(2*d1*t1)-1))/(2*d1))+((2*R2*g1*(h+th*cd))/(th*(th-d1)))*exp(-d1*t1)*((exp((th+d1)*t1)-1)/(th+d1)-(exp((th-d1)*t1)*(exp(2*d1*t1)-1))/(2*d1)))
+	
+
+
+	gt2t1t2=1
+	
+
+
+	gt2t2t3=(1/(4*Alpha3))*(((g3*g3)/(d3*d3))*(Coo.p3+((h+th*cd)/th))*(Coo.p3+((h+th*cd)/th))*((Coo.t3-t2)-(2*exp(-d3*Coo.t3)*(exp(d3*Coo.t3)-exp(d3*t2)))/d3+(exp(-2*d3*Coo.t3)*(exp(2*d3*Coo.t3)-exp(2*d3*t2)))/(2*d3))+((g3*g3*(h+th*cd)*(h+th*cd))/(th*th*(th-d3)*(th-d3)))*((exp(2*th*Coo.t3)-exp(2*th*t2))/(2*th)+(exp(2*(th-d3)*Coo.t3)*(exp(2*d3*Coo.t3)-exp(2*d3*t2)))/(2*d3)-(2*exp((th-d3)*Coo.t3)*(exp((th+d3)*Coo.t3)-exp((th+d3)*t2)))/(th+d3))+((2*g3*g3*(h+th*cd))/(th*(th-d3)*d3))*(Coo.p3+((h+th*cd)/th))*((exp(th*Coo.t3)-exp(th*t2))/th-(exp((th-d3)*Coo.t3)*(exp(d3*Coo.t3)-exp(d3*t2)))/d3-(exp(-d3*Coo.t3)*(exp((th+d3)*Coo.t3)-exp((th+d3)*t2)))/(th+d3)+(exp((th-d3)*Coo.t3)*exp(-d3*Coo.t3)*(exp(2*d3*Coo.t3)-exp(2*d3*t2)))/(2*d3)))
+	
+
+
+
+	ITT0T1=1
+
+
+
+	ITT1T2=IT2*exp(th*t1)*(exp(-th*t1)-exp(-th*t2))/th-(a2-b22*Coo.p2)*1/th*(t2-t1-exp(th*t1)*(exp(-th*t1)-exp(-th*t2))/th)-(g2*GT1*exp(d2*t1))/(th-d2)*((exp(-d2*t1)-exp(-d2*t2))/d2-exp((th-d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th)-(g2/(2*Alpha2))*(g2/d2*(Coo.p2+((h+th*cd)/th))*(1/d2*(1/th*(t2-t1-exp(th*t1)*(exp(-th*t1)-exp(-th*t2))/th)-exp(d2*t1)/(th-d2)*((exp(-d2*t1)-exp(-d2*t2))/d2-exp((th-d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th))-(exp(-d2*t2)/(2*d2))*(1/(th+d2)*((exp(d2*t2)-exp(d2*t1))/d2-exp((th+d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th)-exp(2*d2*t1)/(th-d2)*((exp(-d2*t1)-exp(-d2*t2))/d2-exp((th-d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th)))+(g2*(h+th*cd)/(th*(th-d2)))*(1/(th+d2)*(1/(2*th)*((exp(th*t2)-exp(th*t1))/th-exp(2*th*t1)*(exp(-th*t1)-exp(-th*t2))/th)-exp((th+d2)*t1)/(th-d2)*((exp(-d2*t1)-exp(-d2*t2))/d2-exp((th-d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th))-exp((th-d2)*t2)/(2*d2)*(1/(th+d2)*((exp(d2*t2)-exp(d2*t1))/d2-exp((th+d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th)-exp(2*d2*t1)/(th-d2)*((exp(-d2*t1)-exp(-d2*t2))/d2-exp((th-d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th)))+(R1*exp(-d2*t2))/(2*d2)*(1/(th+d2)*((exp(d2*t2)-exp(d2*t1))/d2-exp((th+d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th)-exp(2*d2*t1)/(th-d2)*((exp(-d2*t1)-exp(-d2*t2))/d2-exp((th-d2)*t1)*(exp(-th*t1)-exp(-th*t2))/th)))
+
+ITTT2T3=IT3*exp(th*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th+b33*Coo.p3*1/th*(Coo.t3-t2-(exp(th*t2)*(exp(-th*t2)-exp(-th*Coo.t3)))/th)-(a3/(th-b3))*((exp(-b3*t2)-exp(-b3*Coo.t3))/b3-exp((th-b3)*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th)+-((g3*GT2*exp(d3*t2))/(th-d3))*((exp(-d3*t2)-exp(-d3*Coo.t3))/d3-exp((th-d3)*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th)-(g3/(2*Alpha3))*(g3/d3*(Coo.p3+((h+th*cd)/th))*(1/d3*(1/th*(Coo.t3-t2-(exp(th*t2)*(exp(-th*t2)-exp(-th*Coo.t3)))/th)-exp(d3*t2)/(th-d3)*((exp(-d3*t2)-exp(-d3*Coo.t3))/d3-exp((th-d3)*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th))-(exp(-d3*Coo.t3)/(2*d3))*(1/(th+d3)*((exp(d3*Coo.t3)-exp(d3*t2))/d3-exp((th+d3)*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th)-exp(2*d3*t2)/(th-d3)*((exp(-d3*t2)-exp(-d3*Coo.t3))/d3-exp((th-d3)*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th)))+(g3*(h+th*cd)/(th*(th-d3)))*(1/(th+d3)*(1/(2*th)*((exp(th*Coo.t3)-exp(th*t2))/th-exp(2*th*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th)-exp((th+d3)*t2)/(th-d3)*((exp(-d3*t2)-exp(-d3*Coo.t3))/d3-exp((th-d3)*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th))-exp((th-d3)*Coo.t3)/(2*d3)*(1/(th+d3)*((exp(d3*Coo.t3)-exp(d3*t2))/d3-exp((th+d3)*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th)-exp(2*d3*t2)/(th-d3)*((exp(-d3*t2)-exp(-d3*Coo.t3))/d3-exp((th-d3)*t2)*(exp(-th*t2)-exp(-th*Coo.t3))/th))))
+	
+	return=((10/Coo.t3)*(Coo.p1/((a1-b11*Coo.p1)*t1+b1*0.5*t1*t1+2)+Coo.p2*(a2-b22*Coo.p2)*(t2-t1)+Coo.p3*(a3*(exp(-b3*t2)-exp(-b3*Coo.t3))/b3-b33*Coo.p3*(Coo.t3-t2)))+(1/Coo.t3)*(Coo.p1*g1*GT0T1+Coo.p2*g2*GTT1T2+Coo.p3*g3*GTT2T3)-(1/Coo.t3)*(gt20t1+gt2t1t2+gt2t2t3)-(1/Coo.t3)*(h+th*cd)*(ITT0T1+ITT1T2/10000+ITTT2T3)-(cb*I0000+500+Coo.u)/Coo.t3)/1000
+	
+
