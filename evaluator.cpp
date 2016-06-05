@@ -110,7 +110,7 @@ vector<string> MFfunction::MFundefinedvar(){
 	bool flag;
 	int k;
 	for(int i=0;i<Lout.size();i++){
-		for(int j=3;j<Lout[i].size();j++){
+		for(int j=2;j<Lout[i].size();j++){
 			if(Lout[i][j].lexem=="VAR"){
 				flag=true;
 				for(k=0;k<undefinedvar.size();k++){
